@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import UserList from "./UserList"
 import { User } from "./types"
@@ -6,6 +6,9 @@ import { User } from "./types"
 
 
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  
+  
   return (
     <div className="App">
       {/*<header className="App-header">
