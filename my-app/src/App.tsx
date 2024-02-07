@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import UserList from "./UserList"
 import { User } from "./types"
@@ -7,6 +7,22 @@ import { User } from "./types"
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(()=> {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try{
+      const response = await fetch('https://dummyjson.com/api/users');
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.log("Error, couldn't get users.", error)
+    }
+  };
+
+  
   
   
   return (
