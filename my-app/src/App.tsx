@@ -7,6 +7,7 @@ import { User } from "./types"
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [selectedUSer, setSelectedUser] = useState<User | null>(null);
 
   useEffect(()=> {
     getUsers();
@@ -20,6 +21,10 @@ function App() {
     } catch (error) {
       console.log("Error, couldn't get users.", error)
     }
+  };
+
+  const selectUser = (user: User) => {
+    selectUser(user);
   };
 
   
@@ -36,9 +41,10 @@ function App() {
       <div className='border-2 m-6'>Table Options, add buttons</div>
       <section className="bg-trueGray-100 flex flex-col m-6 border-2">
         <div className="bg-white h-96 border-2">
-          <div className="border-2 font-bold">List of Users 
+          <div className="border-2 font-bold">List of Users
+             
           </div>
-          
+          <UserList users={users} selectUser={selectUser} />
           <div className="border-2 flex">User Element(s)
             <div>lil icon</div>
             <div>Actual Element</div>
