@@ -7,24 +7,34 @@ import { User } from "./types"
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUSer, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   useEffect(()=> {
-    getUsers();
+    fetchUsers();
   }, []);
 
-  const getUsers = async () => {
+  const fetchUsers = async () => {
     try{
-      const response = await fetch('https://dummyjson.com/api/users');
+      const response = await fetch('https://dummyjson.com/users');
       const data = await response.json();
-      setUsers(data);
+      const mappedUsers: User[] = data.map((userData: any) => ({
+        id: userData.Id,
+        image: userData.Image,
+        firstName: userData.FirstName,
+        lastName: userData.LastName,
+        email: userData.Email,
+        dob: userData,
+        gender: userData.Gender,
+        state: userData.State,
+      }));
+      setUsers(mappedUsers)
     } catch (error) {
       console.log("Error, couldn't get users.", error)
     }
   };
 
   const selectUser = (user: User) => {
-    selectUser(user);
+    setSelectedUser(user);
   };
 
   
