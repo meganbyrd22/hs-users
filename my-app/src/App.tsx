@@ -9,15 +9,19 @@ function App() {
           TABLE HEADER
           </header>*/}
       <main>
-      <div className="h-24 border-2 border-red text-red">Header Spaceholder</div>
-      <h1 className="flex h-44 w-96 mr-2 p-2 self-center font-bold text-indigo-400 text-4xl border-2 bg-white rounded-3xl">Hello!</h1>
-      <section className='bg-trueGray-100 flex m-6'>
-        <div className='bg-green'>TABLE</div>
-        <div className='text-red'>Users</div>
-        <div>Table Options, add buttons</div>
-        <div className=""> {/*Table header*/} </div>
-          <div className=""> {/*TABLE*/} </div>
-            <div className=""> {/*Table lines */} </div>
+      <div className="h-24 border-2 border-red text-lg m-6">Welcome to HealthStream User Management!</div>
+      <div className="m-6 font-bold text-xl">Users</div>
+      <div className='border-2 m-6'>Table Options, add buttons</div>
+      <section className="bg-trueGray-100 flex flex-col m-6 border-2">
+        <div className="bg-white h-96 border-2">
+          <div className="border-2 font-bold">List of Users 
+          </div>
+          
+          <div className="border-2 flex">User Element(s)
+            <div>lil icon</div>
+            <div>Actual Element</div>
+          </div>
+        </div>
 
         
 
