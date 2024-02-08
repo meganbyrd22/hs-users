@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import UserList from "./UserList"
 import { User } from "./types"
+import EditUserForm  from "./EditUserForm"
 
 
 
@@ -45,6 +46,13 @@ function App() {
     setSelectedUser(user);
   };
 
+  function handleSubmit(updatedUser: User) {
+    console.log("Form submitted.", updatedUser)
+  }
+
+  const handleCloseEditForm = () => {
+    setSelectedUser(null);
+  }
   
   
   
@@ -65,13 +73,10 @@ function App() {
           </div>
           <UserList users={users} selectUser={selectUser} />
         </div>
-
-        
-
-
-
       </section>
-
+      {selectedUser && (
+        <EditUserForm user={selectedUser} onClose={handleCloseEditForm} onSubmit={handleSubmit}/>
+      )}
       </main>
     </div>
   );

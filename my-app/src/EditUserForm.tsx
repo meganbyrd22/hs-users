@@ -4,9 +4,10 @@ import { User } from "./types"
 interface EditFormProps {
     user: User;
     onSubmit: (updatedUser: User) => void;
+    onClose: () => void;
 }
 
-function EditUserForm({ user, onSubmit}: EditFormProps) {
+function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
    const  [updatedUser, setUpdatedUser] = useState<User>({...user});
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -89,7 +90,7 @@ return (
         />
     </label>
 
-
+    <button type="button" onClick={onClose}>Close</button>
 
 
 </form>
