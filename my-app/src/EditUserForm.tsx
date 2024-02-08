@@ -10,11 +10,12 @@ function EditUserForm({ user, onSubmit}: EditFormProps) {
    const  [updatedUser, setUpdatedUser] = useState<User>({...user});
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type} = e.target;
+    const isChecked = (e.target as HTMLInputElement).type === "checkbox"
     
     setUpdatedUser(prevUser => ({
         ...prevUser,
-        [name]: type === "checkbox" ? checked : value
+        [name]: type === "checkbox" ? isChecked : value
     }))
    
    };
