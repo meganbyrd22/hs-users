@@ -29,9 +29,10 @@ function App() {
           email: userData.email,
           dob: userData.birthDate,
           gender: userData.gender,
-        }))
+        }));
+        const twentyUsers = mappedUsers.slice(0,20);
+        setUsers(twentyUsers);
         console.log(mappedUsers)
-        setUsers(mappedUsers);
       } else {
         console.log("Invalid data")
       }
