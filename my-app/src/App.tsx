@@ -57,9 +57,9 @@ function App() {
       <div className="h-24 border-2 border-red text-lg m-6">Welcome to HealthStream User Management!</div>
       <div className="m-6 font-bold text-xl">Users</div>
       <div className='border-2 m-6'>Table Options, add buttons</div>
-      <section className="bg-trueGray-100 flex flex-col m-6 border-2">
+      <section className="bg-trueGray-100 flex flex-col m-6 border-2 h-full">
         <div className="bg-white h-96 border-2">
-          <div className="border-2 font-bold">List of Users
+          <div className="border-2 font-bold p-2">List of Users
              
           </div>
           <UserList users={users} selectUser={selectUser} />

@@ -12,8 +12,17 @@ function UserList({ users, selectUser }: UserListProps){
         <ul>
             {users.map((user) => (
                 <li key={user.id} onClick={() => selectUser(user)} className="cursor-pointer">
-                    <img src={user.image} alt={`${user.firstName} ${user.lastName}`} className="w-8 h-8 rounded-full mr-2" />
-                    {user.firstName} {user.lastName} - {user.email} {user.dob} {user.gender}
+                    <div className="grid grid-cols-4 m-2">
+                        <div className="flex gap-4">
+                       <img src={user.image} alt={`${user.firstName} ${user.lastName}`} className="m-2 w-8 h-8 rounded-full" />
+                            <div>
+                                <div className="text-xl"> {user.firstName} {user.lastName}</div>
+                                <div className="italic text-md"> {user.email} </div>
+                            </div>
+                       </div>
+                       <div className="text-xl m-2">{user.dob} </div>
+                       <div className="text-xl m-2">{user.gender}</div>
+                    </div>
                 </li>
       ))}
     </ul>
