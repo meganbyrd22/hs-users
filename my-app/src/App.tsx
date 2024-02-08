@@ -9,6 +9,7 @@ import EditUserForm  from "./EditUserForm"
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(()=> {
     fetchUsers();
@@ -44,14 +45,17 @@ function App() {
 
   const selectUser = (user: User) => {
     setSelectedUser(user);
+    setIsModalOpen(true);
+    console.log(selectedUser)
   };
 
-  function handleSubmit(updatedUser: User) {
+  const handleSubmit = (updatedUser: User) => {
     console.log("Form submitted.", updatedUser)
   }
 
   const handleCloseEditForm = () => {
     setSelectedUser(null);
+    setIsModalOpen(false);
   }
   
   
@@ -71,10 +75,10 @@ function App() {
           <div className="font-bold p-2">List of Users
              
           </div>
-          <UserList users={users} selectUser={selectUser} />
+          <UserList users={users} selectUser={selectUser}/>
         </div>
       </section>
-      {selectedUser && (
+      {isModalOpen && selectedUser && (
         <EditUserForm user={selectedUser} onClose={handleCloseEditForm} onSubmit={handleSubmit}/>
       )}
       </main>
