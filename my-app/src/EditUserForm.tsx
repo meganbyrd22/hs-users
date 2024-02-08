@@ -1,0 +1,101 @@
+import React, { useState } from "react"
+import { User } from "./types"
+
+interface EditFormProps {
+    user: User;
+    onSubmit: (updatedUser: User) => void;
+}
+
+function EditUserForm({ user, onSubmit}: EditFormProps) {
+   const  [updatedUser, setUpdatedUser] = useState<User>({...user});
+
+   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type, checked } = e.target;
+    
+    setUpdatedUser(prevUser => ({
+        ...prevUser,
+        [name]: type === "checkbox" ? checked : value
+    }))
+   
+   };
+
+   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit(updatedUser)
+   };
+
+
+return (
+<form onSubmit={handleSubmit}>
+    <label>
+        First Name: 
+        <input 
+            type="text" 
+            name="firstName" 
+            value={updatedUser.firstName} 
+            onChange={handleChange} 
+        />
+    </label>
+
+    <label>
+        Last Name: 
+        <input 
+            type="text" 
+            name="lastName" 
+            value={updatedUser.lastName} 
+            onChange={handleChange} 
+        />
+    </label>
+
+    <label>
+        Email: 
+        <input 
+            type="text" 
+            name="email" 
+            value={updatedUser.email} 
+            onChange={handleChange} 
+        />
+    </label>
+
+    <label>
+        Date of Birth: 
+        <input 
+            type="date" 
+            name="dob" 
+            value={updatedUser.dob} 
+            onChange={handleChange} 
+        />
+    </label>
+
+    <label>
+        Gender
+        <select 
+            name="gender" 
+            value={updatedUser.gender} 
+            onChange={handleChange}>
+                <option value="male">Male</option>
+                <option value="female">Female</option>  
+        </select>
+    </label>
+
+   <label>
+        State of Residence: 
+        <input 
+            type="text" 
+            name="state" 
+            value={updatedUser.state} 
+            onChange={handleChange} 
+        />
+    </label>
+
+
+
+
+</form>
+
+)
+
+}
+
+
+export default EditUserForm
