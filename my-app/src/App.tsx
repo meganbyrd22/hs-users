@@ -17,17 +17,24 @@ function App() {
     try{
       const response = await fetch('https://dummyjson.com/users');
       const data = await response.json();
-      const mappedUsers: User[] = data.map((userData: any) => ({
-        id: userData.Id,
-        image: userData.Image,
-        firstName: userData.FirstName,
-        lastName: userData.LastName,
-        email: userData.Email,
-        dob: userData,
-        gender: userData.Gender,
-        state: userData.State,
-      }));
-      setUsers(mappedUsers)
+
+      console.log('Data from API:', data)
+
+      if (Array.isArray(data.users)){
+        const mappedUsers: User[] = data.users.map((userData: any) => ({
+          id: userData.id.toString(),
+          image: userData.image,
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          dob: userData.birthDate,
+          gender: userData.gender,
+        }))
+        console.log(mappedUsers)
+        setUsers(mappedUsers);
+      } else {
+        console.log("Invalid data")
+      }
     } catch (error) {
       console.log("Error, couldn't get users.", error)
     }
