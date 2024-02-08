@@ -28,7 +28,7 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
 
 
 return (
-<form onSubmit={handleSubmit}>
+<form onSubmit={handleSubmit} className="h-96 w-96 border-4 text-xxl fixed inset-0 bg-indigo-400 align-center">
     <label>
         First Name: 
         <input 
