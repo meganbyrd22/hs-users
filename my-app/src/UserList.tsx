@@ -18,7 +18,7 @@ function UserList({ users, selectUser }: UserListProps){
                         <img src={user.image} alt={`${user.firstName} ${user.lastName}`} className="m-2 w-8 h-8 rounded-full" />
                             <div className="grid grid-cols-2 m-2 w-2/3">
                                 <div className="text-xl"> {user.firstName} {user.lastName}</div>
-                                <div className="italic text-md"> {user.email} </div>
+                                <div className="italic text-md m-2"> {user.email} </div>
                             </div>
                     </div>
                 </li>

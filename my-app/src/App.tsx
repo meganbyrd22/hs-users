@@ -58,15 +58,12 @@ function App() {
       <div className="m-6 font-bold text-xl">Users</div>
       <div className='border-2 m-6'>Table Options, add buttons</div>
       <section className="bg-trueGray-100 flex flex-col m-6 border-2 h-full">
-        <div className="bg-white h-96 border-2">
-          <div className="border-2 font-bold p-2">List of Users
+        
+        <div className="bg-white h-full border-2">
+          <div className="font-bold p-2">List of Users
              
           </div>
           <UserList users={users} selectUser={selectUser} />
-          <div className="border-2 flex">User Element(s)
-            <div>lil icon</div>
-            <div>Actual Element</div>
-          </div>
         </div>
 
         
