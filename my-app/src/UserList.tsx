@@ -6,6 +6,13 @@ interface UserListProps {
     selectUser: (user: User) => void;
 }
 
+function updateBirthdayFormat(dateString: string): string {
+    const date = new Date(dateString);
+    const month = date.toLocaleString('default', { month: 'long'});
+    const day = date.getDate();
+    return `${month}: ${day}`;
+}
+
 function UserList({ users, selectUser }: UserListProps){
     console.log('Users', users);
     return (
@@ -20,8 +27,8 @@ function UserList({ users, selectUser }: UserListProps){
                                 <div className="italic text-md"> {user.email} </div>
                             </div>
                        </div>
-                       <div className="text-xl m-2">{user.dob} </div>
-                       <div className="text-xl m-2">{user.gender}</div>
+                       <div className="text-xl m-2">{updateBirthdayFormat(user.dob)} </div>
+                       <div className="text-xl m-2">{user.gender.charAt(0).toUpperCase() + user.gender.slice(1)}</div>
                     </div>
                 </li>
       ))}
