@@ -5,10 +5,13 @@ interface EditFormProps {
     user: User;
     onSubmit: (updatedUser: User) => void;
     onClose: () => void;
+    mutationStatus: string | null;
+    setMutationStatus: (status: string | null) => void;
 }
 
 function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
    const  [updatedUser, setUpdatedUser] = useState<User>({...user});
+   const [mutationStatus, setMutationStatus] = useState<string | null>(null);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type} = e.target;
@@ -21,9 +24,28 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
    
    };
 
-   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit(updatedUser)
+
+    try {
+        const response = await fetch('https://dummyjson.com/users', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedUser)
+        });
+
+        if (response.ok) {
+            setMutationStatus("Success");
+            onSubmit(updatedUser)
+        } else {
+            setMutationStatus("Failed");
+        }
+    } catch (error) {
+        console.log("Sorry, this API does not allow writes!", error);
+        setMutationStatus("Failed")
+    }
    };
 
 
@@ -103,9 +125,16 @@ return (
 
             </div>
             <div className="flex justify-center">
+                <button className="mt-16 p-2 border-2 rounded-full text-sm w-24"type="submit">Submit</button>
                 <button className="mt-16 p-2 border-2 rounded-full text-sm w-24"type="button" onClick={onClose}>Close</button>
             </div>
+             {mutationStatus && (
+                <div className="bg-white text-4xl">
+                    Mutation Status: {mutationStatus === "Success" ? "Mutation successful" : "Mutation failed"}
+                </div>
+            )}
             </form>
+           
     </div>
     )
 

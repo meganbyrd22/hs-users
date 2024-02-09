@@ -10,6 +10,7 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [mutationStatus, setMutationStatus] = useState<string | null>(null);
 
   useEffect(()=> {
     fetchUsers();
@@ -50,7 +51,8 @@ function App() {
   };
 
   const handleSubmit = (updatedUser: User) => {
-    console.log("Form submitted.", updatedUser)
+    console.log("Form submitted.", updatedUser);
+    setMutationStatus(null);
   }
 
   const handleCloseEditForm = () => {
@@ -79,9 +81,20 @@ function App() {
         </div>
       </section>
       {isModalOpen && selectedUser && (
-        <EditUserForm user={selectedUser} onClose={handleCloseEditForm} onSubmit={handleSubmit}/>
+        <EditUserForm 
+            user={selectedUser} 
+            onClose={handleCloseEditForm} 
+            onSubmit={handleSubmit}
+            mutationStatus={mutationStatus}
+            setMutationStatus={setMutationStatus}
+            />
       )}
       </main>
+      {mutationStatus && (
+                <div className="bg-white text-4xl">
+                    Mutation Status: {mutationStatus === "Success" ? "Mutation successful" : "Mutation failed"}
+                </div>
+      )}
     </div>
   );
 }
