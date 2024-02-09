@@ -90,11 +90,6 @@ function App() {
             />
       )}
       </main>
-      {mutationStatus && (
-                <div className="bg-white text-4xl">
-                    Mutation Status: {mutationStatus === "Success" ? "Mutation successful" : "Mutation failed"}
-                </div>
-      )}
     </div>
   );
 }
