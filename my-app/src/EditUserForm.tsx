@@ -28,76 +28,78 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
 
 
 return (
-<form onSubmit={handleSubmit} className="h-96 w-96 border-4 text-xxl fixed inset-0 bg-indigo-400 align-center">
-    <label>
-        First Name: 
-        <input 
-            type="text" 
-            name="firstName" 
-            value={updatedUser.firstName} 
-            onChange={handleChange} 
-        />
-    </label>
+    <div className= "flex fixed justify-center items-center inset-0 bg-black bg-opacity-50">
+            <form onSubmit={handleSubmit} className="h-96 w-96 border-4 border-red  bg-white text-xxl flex flex-col">
+                <h1 className="font-bold text-xxl">Edit User</h1>
+                <label>
+                    First Name: 
+                    <input 
+                        type="text" 
+                        name="firstName" 
+                        value={updatedUser.firstName} 
+                        onChange={handleChange} 
+                    />
+                </label>
 
-    <label>
-        Last Name: 
-        <input 
-            type="text" 
-            name="lastName" 
-            value={updatedUser.lastName} 
-            onChange={handleChange} 
-        />
-    </label>
+                <label>
+                    Last Name: 
+                    <input 
+                        type="text" 
+                        name="lastName" 
+                        value={updatedUser.lastName} 
+                        onChange={handleChange} 
+                    />
+                </label>
 
-    <label>
-        Email: 
-        <input 
-            type="text" 
-            name="email" 
-            value={updatedUser.email} 
-            onChange={handleChange} 
-        />
-    </label>
+                <label>
+                    Email: 
+                    <input 
+                        type="text" 
+                        name="email" 
+                        value={updatedUser.email} 
+                        onChange={handleChange} 
+                    />
+                </label>
 
-    <label>
-        Date of Birth: 
-        <input 
-            type="date" 
-            name="dob" 
-            value={updatedUser.dob} 
-            onChange={handleChange} 
-        />
-    </label>
+                <label>
+                    Date of Birth: 
+                    <input 
+                        type="date" 
+                        name="dob" 
+                        value={updatedUser.dob} 
+                        onChange={handleChange} 
+                    />
+                </label>
 
-    <label>
-        Gender
-        <select 
-            name="gender" 
-            value={updatedUser.gender} 
-            onChange={handleChange}>
-                <option value="male">Male</option>
-                <option value="female">Female</option>  
-        </select>
-    </label>
+                <label>
+                    Gender
+                    <select 
+                        name="gender" 
+                        value={updatedUser.gender} 
+                        onChange={handleChange}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>  
+                    </select>
+                </label>
 
-   <label>
-        State of Residence: 
-        <input 
-            type="text" 
-            name="state" 
-            value={updatedUser.state} 
-            onChange={handleChange} 
-        />
-    </label>
+            <label>
+                    State of Residence: 
+                    <input 
+                        type="text" 
+                        name="state" 
+                        value={updatedUser.state} 
+                        onChange={handleChange} 
+                    />
+                </label>
 
-    <button type="button" onClick={onClose}>Close</button>
+                <button type="button" onClick={onClose}>Close</button>
 
 
-</form>
+            </form>
+    </div>
+    )
 
-)
-
-}
+    }
 
 
 export default EditUserForm
