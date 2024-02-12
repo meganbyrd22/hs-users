@@ -74,13 +74,13 @@ function App() {
       </div>
       <div className="ml-6 font-bold text-3xl text-red">User Dashboard</div>
       <div className='ml-6 text-md italic'>Select a user to make changes</div>
-      <section className="bg-trueGray-100 flex flex-col m-6 border-2 h-full">
+      <section className="bg-trueGray-100 flex flex-col m-6 border-2 rounded-lg h-full">
         
         <div className="bg-white h-full border-2">
           <div className='bg-black bg-opacity-25'>
           <div className="grid grid-cols-2  h-12 w-2/3">
-            <div className="font-bold text-xl m-2">Name</div>
-            <div className="font-bold text-xl m-2 ml-16">Email</div>
+            <div className="font-bold text-xl m-2 text-gray-100">Name</div>
+            <div className="font-bold text-xl m-2 ml-16 text-gray-100">Email</div>
           </div>
           </div>
           <UserList users={users} selectUser={selectUser}/>
