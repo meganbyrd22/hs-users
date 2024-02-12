@@ -25,7 +25,7 @@ const validStates = [
         "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
 ];
 
-const validGenders = ["Male", "Female"]
+const validGenders = ["male", "female"]
 
 if (!updatedUser.firstName) {
     errors.firstName = "First name is required"
