@@ -17,6 +17,16 @@ const isValidEmail = (email: string) => {
         return emailRegex.test(email)
     };
 
+const validStates = [
+    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", 
+        "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
+        "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
+        "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
+        "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
+
+const validGenders = ["Male", "Female"]
+
 if (!updatedUser.firstName) {
     errors.firstName = "First name is required"
 }
@@ -39,6 +49,15 @@ if (!updatedUser.firstName) {
         errors.dob = "Date of birth incorrect";
     }
 }
+
+if(!validGenders.includes(updatedUser.gender)){
+    errors.gender = "Please select gender!"
+}
+
+if(!validStates.includes(updatedUser.state)){
+    errors.state = "Please select state!"
+}
+    
 return errors;
 }
 
@@ -153,18 +172,70 @@ return (
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>  
                             </select>
+                            {errors.gender && <div className="text-xs italic">{errors.gender}</div>}
                         </label>
                     </div>
                     <div className="mt-4">
                         <label className="m-2">
                             State: 
-                            <input className="border-2 rounded-lg text-sm p-2 w-60 ml-12 italic"
-                                type="text" 
+                            <select className="border-2 rounded-lg text-sm p-2 w-60 ml-12 italic"
                                 name="state" 
                                 value={updatedUser.state} 
                                 onChange={handleChange} 
                             />
+                            <option value="">Select State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
                         </label>
+                        {errors.state && <div className="text-xs italic">{errors.state}</div>}
                     </div>
                     
 
