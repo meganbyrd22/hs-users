@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import logo from './Logo.png';
 import UserList from "./UserList"
 import { User } from "./types"
 import EditUserForm  from "./EditUserForm"
@@ -68,14 +68,20 @@ function App() {
           TABLE HEADER
           </header>*/}
       <main>
-      <div className="h-24 border-2 border-red text-lg m-6">Welcome to HealthStream User Management!</div>
-      <div className="m-6 font-bold text-xl">Users</div>
-      <div className='border-2 m-6'>Table Options, add buttons</div>
+      <div className="flex">
+        <div className="w-2/4  text-3xl m-6">Welcome to HealthStream User Management!</div>
+        <div><img src={logo} alt="HS logo" className='h-28 w-28 fixed top-6 right-6 '/></div>
+      </div>
+      <div className="ml-6 font-bold text-3xl text-red">User Dashboard</div>
+      <div className='ml-6 text-md italic'>Select a user to make changes</div>
       <section className="bg-trueGray-100 flex flex-col m-6 border-2 h-full">
         
         <div className="bg-white h-full border-2">
-          <div className="font-bold p-2">List of Users
-             
+          <div className='bg-black bg-opacity-25'>
+          <div className="grid grid-cols-2  h-12 w-2/3">
+            <div className="font-bold text-xl m-2">Name</div>
+            <div className="font-bold text-xl m-2 ml-16">Email</div>
+          </div>
           </div>
           <UserList users={users} selectUser={selectUser}/>
         </div>
