@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState} from "react"
 import { User } from "./types"
 
 interface EditFormProps {
@@ -9,9 +9,44 @@ interface EditFormProps {
     setMutationStatus: (status: string | null) => void;
 }
 
+    
+function validateValues(updatedUser: User){
+const errors: Partial<User> = {};
+const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email)
+    };
+
+if (!updatedUser.firstName) {
+    errors.firstName = "First name is required"
+}
+
+    if (!updatedUser.lastName) {
+    errors.lastName = "Last name is required"
+}
+
+    if (!updatedUser.email) {
+    errors.email = "Email is required"
+}else if (!isValidEmail(updatedUser.email)) {
+    errors.email ="Email format incorrect"
+}
+
+    if (!updatedUser.dob) {
+    errors.dob = "Date of birth is required";
+} else {
+    const dobDate = new Date(updatedUser.dob);
+    if (isNaN(dobDate.getTime()) || dobDate <new Date('1900-01-01') || dobDate > new Date('2001-12-31')){
+        errors.dob = "Date of birth incorrect";
+    }
+}
+return errors;
+}
+
+
 function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
    const  [updatedUser, setUpdatedUser] = useState<User>({...user});
    const [mutationStatus, setMutationStatus] = useState<string | null>(null);
+   const [errors, setErrors] = useState<Partial<User>>({});
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type} = e.target;
@@ -26,27 +61,33 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
 
    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    const validationErrors = validateValues(updatedUser);
+    setErrors(validationErrors);
 
-    try {
-        const response = await fetch('https://dummyjson.com/users', {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedUser)
-        });
+    if(Object.keys(validationErrors).length === 0){
+        try {
+            const response = await fetch('https://dummyjson.com/users', {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedUser)
+            });
 
-        if (response.ok) {
-            setMutationStatus("Success");
-            onSubmit(updatedUser)
-        } else {
-            setMutationStatus("Failed");
+            if (response.ok) {
+                setMutationStatus("Success");
+                onSubmit(updatedUser)
+            } else {
+                setMutationStatus("Failed");
+            }
+        } catch (error) {
+            console.log("Sorry, this API does not allow writes!", error);
+            setMutationStatus("Failed")
         }
-    } catch (error) {
-        console.log("Sorry, this API does not allow writes!", error);
-        setMutationStatus("Failed")
-    }
-   };
+        }
+        return errors;
+};
 
 
 return (
@@ -136,9 +177,8 @@ return (
                 </div>
             )}
     </div>
-    )
+    );
+}
 
-    }
 
-
-export default EditUserForm
+export default EditUserForm;
