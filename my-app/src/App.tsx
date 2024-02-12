@@ -3,7 +3,7 @@ import logo from './Logo.png';
 import UserList from "./UserList"
 import { User } from "./types"
 import EditUserForm  from "./EditUserForm"
-
+import Toast from "./Toast"
 
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
 
   const handleSubmit = (updatedUser: User) => {
     console.log("Form submitted.", updatedUser);
-    setMutationStatus(null);
+    setMutationStatus("Data updated!");
   }
 
   const handleCloseEditForm = () => {
@@ -94,6 +94,9 @@ function App() {
             mutationStatus={mutationStatus}
             setMutationStatus={setMutationStatus}
             />
+      )}
+      {mutationStatus && (
+        <Toast message={mutationStatus} onClose={() => setMutationStatus(null)}/>
       )}
       </main>
     </div>
