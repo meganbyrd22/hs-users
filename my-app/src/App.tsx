@@ -85,12 +85,8 @@ function App() {
             <div className="font-bold text-xl m-2 text-gray-100">Name</div>
             <div className="font-bold text-xl m-2 ml-16 text-gray-100">Email</div>
           </div>
-        </div>
-          {isLoading ? (
-            <Toast message={"Data loading"} onClose={() => setIsLoading(false)} />
-            ) : (
-          <UserList users={users} selectUser={selectUser}/> 
-          ) }
+          </div>
+          <UserList users={users} selectUser={selectUser}/>
         </div>
       </section>
       {isModalOpen && selectedUser && (
@@ -106,11 +102,10 @@ function App() {
         <Toast message={mutationStatus} onClose={() => setMutationStatus(null)}/>
       )}
 
-      
+      {isLoading && (<Toast message={"Data loading..."} onClose={() => setIsLoading} />)}
       </main>
     </div>
   );
 }
-
 
 export default App;
