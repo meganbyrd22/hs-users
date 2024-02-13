@@ -11,6 +11,7 @@ function App() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [mutationStatus, setMutationStatus] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(()=> {
     fetchUsers();
@@ -35,12 +36,14 @@ function App() {
         }));
         const twentyUsers = mappedUsers.slice(0,20);
         setUsers(twentyUsers);
+        setIsLoading(false);
         console.log(mappedUsers)
       } else {
         console.log("Invalid data")
       }
     } catch (error) {
       console.log("Error, couldn't get users.", error)
+      setIsLoading(false);
     }
   };
 
@@ -82,8 +85,12 @@ function App() {
             <div className="font-bold text-xl m-2 text-gray-100">Name</div>
             <div className="font-bold text-xl m-2 ml-16 text-gray-100">Email</div>
           </div>
-          </div>
-          <UserList users={users} selectUser={selectUser}/>
+        </div>
+          {isLoading ? (
+            <Toast message={"Data loading"} onClose={() => setIsLoading(false)} />
+            ) : (
+          <UserList users={users} selectUser={selectUser}/> 
+          ) }
         </div>
       </section>
       {isModalOpen && selectedUser && (
@@ -98,9 +105,12 @@ function App() {
       {mutationStatus && (
         <Toast message={mutationStatus} onClose={() => setMutationStatus(null)}/>
       )}
+
+      
       </main>
     </div>
   );
 }
+
 
 export default App;
