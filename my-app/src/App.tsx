@@ -54,6 +54,7 @@ function App() {
   };
 
   const handleSubmit = (updatedUser: User) => {
+    setIsLoading(true);
     console.log("Form submitted.", updatedUser);
     setMutationStatus("Data updated!");
   }
@@ -96,6 +97,7 @@ function App() {
             onSubmit={handleSubmit}
             mutationStatus={mutationStatus}
             setMutationStatus={setMutationStatus}
+            isLoading={isLoading}
             />
       )}
       {mutationStatus && (

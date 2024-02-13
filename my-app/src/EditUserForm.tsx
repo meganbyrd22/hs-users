@@ -7,6 +7,7 @@ interface EditFormProps {
     onClose: () => void;
     mutationStatus: string | null;
     setMutationStatus: (status: string | null) => void;
+    isLoading: boolean;
 }
 
     
@@ -111,7 +112,7 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
 
 return (
     <div className= "flex  flex-col fixed justify-center items-center inset-0 bg-black bg-opacity-50">
-            <form onSubmit={handleSubmit} className="h-3/5 w-2/5 border-4 border-red rounded-lg p-2 bg-white text-xxl flex flex-col">
+            <form onSubmit={handleSubmit} className="h-4/6 w-2/5 border-4 border-red rounded-lg p-2 bg-white text-xxl flex flex-col">
                 <h1 className="font-bold text-3xl p-2">Edit User</h1>
                 <div className="grid grid-cols-1 gap-2">
                     <div className="flex">
@@ -242,7 +243,7 @@ return (
 
             </div>
             <div className="flex flex-col items-center">
-                <button className="mt-16 p-2 border-2 rounded-full text-sm w-24 hover:bg-gray-200"type="submit">Submit</button>
+                <button className="mt-12 p-2 border-2 rounded-full text-sm w-24 hover:bg-gray-200"type="submit">Submit</button>
                 <button className="mt-6 p-2 border-2 rounded-full text-xs w-16 hover:bg-gray-200"type="button" onClick={onClose}>Close</button>
             </div>
              
@@ -258,4 +259,3 @@ return (
 
 
 export default EditUserForm;
-
