@@ -117,13 +117,13 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
 
 return (
     <div className= "flex  flex-col fixed justify-center items-center inset-0 bg-black bg-opacity-50">
-            <form onSubmit={handleSubmit} className="h-4/6 w-2/5 border-4 border-red rounded-lg p-2 bg-white text-xxl flex flex-col">
+            <form onSubmit={handleSubmit} className="w-full md:w-2/5 lg:w-1/3 border-4 border-red rounded-lg p-2 bg-white text-xxl flex flex-col">
                 <h1 className="font-bold text-3xl p-2">Edit User</h1>
                 <div className="grid grid-cols-1 gap-2">
                     <div className="flex">
                         <label className="m-2">
                             First Name: 
-                            <input className="border-2 rounded-lg text-sm p-2 w-60 ml-2 italic"
+                            <input className="border-2 rounded-lg text-sm p-2 w-60 italic"
                                 type="text" 
                                 name="firstName" 
                                 value={updatedUser.firstName} 
@@ -134,7 +134,7 @@ return (
 
                         <label className="m-2">
                             Last Name: 
-                            <input className="border-2 rounded-lg text-sm p-2 w-60 ml-2 italic"
+                            <input className="border-2 rounded-lg text-sm p-2 w-60  italic"
                                 type="text" 
                                 name="lastName" 
                                 value={updatedUser.lastName} 
@@ -143,10 +143,10 @@ return (
                             {errors.lastName && <div className="text-xs italic">{errors.lastName}</div>}
                         </label>
                     </div>
-                    <div className="grid grid-cols-2">
-                    <label className="m-2">
+                    <div className="grid grid-cols-1">
+                    <label className="flex flex-col m-2">
                         Email: 
-                        <input className="border-2 rounded-lg text-sm p-2 w-60 ml-12 italic"
+                        <input className="border-2 rounded-lg text-sm p-2 w-60 italic"
                             type="text" 
                             name="email" 
                             value={updatedUser.email} 
