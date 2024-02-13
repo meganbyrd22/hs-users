@@ -1,3 +1,3 @@
-#HealthStream User Management
+HealthStream User Management
 
 Technical Assessment
