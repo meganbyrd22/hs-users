@@ -1,5 +1,6 @@
 import React, { useState} from "react"
-import { User } from "./types"
+import { User } from "./types";
+import Toast from "./Toast"
 
 interface EditFormProps {
     user: User;
@@ -64,9 +65,10 @@ return errors;
 
 
 function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
-   const  [updatedUser, setUpdatedUser] = useState<User>({...user});
+   const [updatedUser, setUpdatedUser] = useState<User>({...user});
    const [mutationStatus, setMutationStatus] = useState<string | null>(null);
    const [errors, setErrors] = useState<Partial<User>>({});
+   const [isLoading, setIsLoading] = useState<boolean>(false);
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type} = e.target;
@@ -84,6 +86,8 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
     
     const validationErrors = validateValues(updatedUser);
     setErrors(validationErrors);
+
+    setIsLoading(true);
 
     if(Object.keys(validationErrors).length === 0){
         try {
@@ -103,7 +107,7 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
             }
         } catch (error) {
             console.log("Sorry, this API does not allow writes!", error);
-            setMutationStatus("Failed")
+            setMutationStatus("Failed");
         }
         }
         return errors;
@@ -248,6 +252,8 @@ return (
             </div>
              
             </form>
+            {isLoading && (<Toast message={"Data loading..."} onClose={() => setIsLoading(false)} />)}
+
            {mutationStatus && (
                 <div className="flex m-12 p-4 bg-white text-3xl border-2 rounded-full">
                     Mutation Status: {mutationStatus === "Success" ? "Mutation successful" : "Mutation failed - this API only allows reads!"}

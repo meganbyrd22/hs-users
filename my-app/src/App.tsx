@@ -18,6 +18,7 @@ function App() {
   }, []);
 
   const fetchUsers = async () => {
+    setIsLoading(true);
     try{
       const response = await fetch('https://dummyjson.com/users');
       const data = await response.json();
@@ -43,6 +44,8 @@ function App() {
       }
     } catch (error) {
       console.log("Error, couldn't get users.", error)
+      
+    } finally {
       setIsLoading(false);
     }
   };
@@ -90,6 +93,7 @@ function App() {
           <UserList users={users} selectUser={selectUser}/>
         </div>
       </section>
+      
       {isModalOpen && selectedUser && (
         <EditUserForm 
             user={selectedUser} 
@@ -100,11 +104,13 @@ function App() {
             isLoading={isLoading}
             />
       )}
-      {mutationStatus && (
+
+      {isLoading && (<Toast message={"Data loading..."} onClose={() => setIsLoading(false)} />)}
+
+      {!isLoading && mutationStatus && (
         <Toast message={mutationStatus} onClose={() => setMutationStatus(null)}/>
       )}
 
-      {isLoading && (<Toast message={"Data loading..."} onClose={() => setIsLoading} />)}
       </main>
     </div>
   );
