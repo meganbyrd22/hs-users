@@ -30,11 +30,11 @@ const validStates = [
 const validGenders = ["male", "female"]
 
 if (!updatedUser.firstName) {
-    errors.firstName = "First name is required"
+    errors.firstName = "Required"
 }
 
     if (!updatedUser.lastName) {
-    errors.lastName = "Last name is required"
+    errors.lastName = "Required"
 }
 
     if (!updatedUser.email) {
@@ -44,20 +44,20 @@ if (!updatedUser.firstName) {
 }
 
     if (!updatedUser.dob) {
-    errors.dob = "Date of birth is required";
+    errors.dob = "Required";
 } else {
     const dobDate = new Date(updatedUser.dob);
     if (isNaN(dobDate.getTime()) || dobDate <new Date('1900-01-01') || dobDate > new Date('2001-12-31')){
-        errors.dob = "Date of birth incorrect";
+        errors.dob = "Invalid response";
     }
 }
 
 if(!validGenders.includes(updatedUser.gender)){
-    errors.gender = "Please select gender!"
+    errors.gender = "Required"
 }
 
 if(!validStates.includes(updatedUser.state)){
-    errors.state = "Please select state!"
+    errors.state = "Required"
 }
     
 return errors;
@@ -155,10 +155,10 @@ return (
                     </label>
                     </div>
                     <div className="w-full h-6 bg-black bg-opacity-25 rounded-lg"></div>
-                    <div className="mt-4">
+                    <div className="mt-4 grid grid-cols-2">
                         <label className="m-2">
                             Birthday: 
-                            <input className="border-2 rounded-lg text-sm p-2 w-60 ml-7 italic"
+                            <input className="border-2 rounded-lg text-sm p-2 w-40 ml-7 italic"
                                 type="date" 
                                 name="dob" 
                                 value={updatedUser.dob} 
@@ -170,14 +170,14 @@ return (
 
                         <label className="m-2">
                             Gender
-                            <select className="border-2 rounded-lg text-sm p-2 w-60 ml-2 italic"
+                            <select className="border-2 rounded-lg text-sm p-2 w-40 ml-2 italic"
                                 name="gender" 
                                 value={updatedUser.gender} 
                                 onChange={handleChange}>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>  
                             </select>
-                            {errors.gender && <div className="text-xs italic">{errors.gender}</div>}
+                            {errors.gender && <div className="text-xs italic w-48">{errors.gender}</div>}
                         </label>
                     </div>
                     <div className="mt-4">
@@ -241,7 +241,7 @@ return (
                             </select>
                             
                         </label>
-                        {errors.state && <div className="text-xs italic">{errors.state}</div>}
+                        {errors.state && <div className="text-xs italic ml-2">{errors.state}</div>}
                     </div>
                     
 
