@@ -87,9 +87,8 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
     const validationErrors = validateValues(updatedUser);
     setErrors(validationErrors);
 
-    setIsLoading(true);
-
     if(Object.keys(validationErrors).length === 0){
+        setIsLoading(true);
         try {
             const response = await fetch('https://dummyjson.com/users', {
                 method: "PUT",
@@ -108,6 +107,8 @@ function EditUserForm({ user, onSubmit, onClose}: EditFormProps) {
         } catch (error) {
             console.log("Sorry, this API does not allow writes!", error);
             setMutationStatus("Failed");
+        } finally {
+            setIsLoading(false);
         }
         }
         return errors;
@@ -252,7 +253,7 @@ return (
             </div>
              
             </form>
-            {isLoading && (<Toast message={"Data loading..."} onClose={() => setIsLoading(false)} />)}
+            {isLoading && Object.keys(errors).length === 0 && (<Toast message={"Data loading..."} onClose={() => setIsLoading(false)} />)}
 
            {mutationStatus && (
                 <div className="flex m-12 p-4 bg-white text-3xl border-2 rounded-full">
