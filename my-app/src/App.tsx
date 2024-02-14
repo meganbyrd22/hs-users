@@ -76,19 +76,20 @@ function App() {
           </header>*/}
       <main>
       <div className="flex">
-        <div className="w-2/4  text-3xl m-6">Welcome to HealthStream User Management!</div>
-        <div><img src={logo} alt="HS logo" className='h-28 w-28 fixed top-6 right-6 '/></div>
+        <div className="w-2/4 text-4xl m-6">Welcome to HealthStream User Management!</div>
+        <div><img src={logo} alt="HS logo" className='h-28 w-28 fixed top-6 right-6'/></div>
       </div>
-      <div className="ml-6 font-bold text-3xl text-red">User Dashboard</div>
+      <div className="ml-6 font-bold text-2xl text-blue-800">User Dashboard</div>
       <div className='ml-6 text-md italic'>Select a user to make changes</div>
-      <section className="bg-trueGray-100 flex flex-col m-6 border-2 rounded-lg h-full">
+      <section className="bg-trueGray-100 flex flex-col m-6 border-2 border-none h-full">
         
-        <div className="bg-white h-full border-2">
-          <div className='bg-black bg-opacity-25'>
-          <div className="grid grid-cols-2  h-12 w-2/3">
-            <div className="font-bold text-xl m-2 text-gray-100">Name</div>
-            <div className="font-bold text-xl m-2 ml-16 text-gray-100">Email</div>
+        <div className="bg-trueGray-400 h-full border-1">
+          <div className='bg-slate-100'>
+          <div className="grid grid-cols-2 h-12 w-2/3">
+            <div className="font-bold text-xl m-2 text-gray-400">Name</div>
+            <div className="font-bold text-xl m-2 ml-16 text-gray-400">Email</div>
           </div>
+          <hr className="h-1 bg-amber-300 "></hr>
           </div>
           <UserList users={users} selectUser={selectUser}/>
         </div>
